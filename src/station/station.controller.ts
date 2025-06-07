@@ -27,6 +27,12 @@ export class StationController {
   }
 
   @Get(':id')
+  @ApiOperation({ summary: 'Повертає назву станції' })
+  @ApiResponse({ status: 201, description: 'Київ' })
+  @ApiResponse({
+    status: 400,
+    description: 'Станції з таким кодом не існує, або ще не додана',
+  })
   findOne(@Param('id') id: string) {
     return this.stationService.findOne(+id);
   }
