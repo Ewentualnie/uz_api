@@ -1,4 +1,11 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { StationService } from './station.service';
 import { CreateStationDto } from './dto/create-station.dto';
 import { ApiOperation, ApiResponse } from '@nestjs/swagger';
@@ -33,7 +40,7 @@ export class StationController {
     status: 400,
     description: 'Станції з таким кодом не існує, або ще не додана',
   })
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id: number) {
     return this.stationService.findOne(+id);
   }
 }
