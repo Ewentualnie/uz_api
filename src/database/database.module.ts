@@ -1,5 +1,6 @@
 import { Module, Global } from '@nestjs/common';
 import { Pool } from 'pg';
+import { DBService } from './database.service';
 
 @Global()
 @Module({
@@ -17,6 +18,7 @@ import { Pool } from 'pg';
         return pool;
       },
     },
+    DBService,
   ],
   exports: ['PG_POOL'],
 })
