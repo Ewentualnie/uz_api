@@ -59,4 +59,12 @@ export class TrainService {
     await this.pool.query(C_Queries.deleteCarByNumber, [train.id, newCars]);
     return await this.findOne(id);
   }
+
+  async findById(id: number) {
+    const train = await this.pool.query(T_Queries.getTrainById, [id]);
+    if (!train) {
+      throw new BadRequestException(`Поїзда з id ${id} не існує`);
+    }
+    return train.rows[0].number;
+  }
 }

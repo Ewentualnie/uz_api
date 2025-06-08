@@ -54,4 +54,18 @@ export class StationService {
       );
     }
   }
+
+  async findByName(name: string) {
+    const result = await this.pool.query(S_Queries.getStationByName, [name]);
+    if (result.rows[0]) {
+      return result.rows[0];
+    } else {
+      throw new BadRequestException(`Станції з назвою ${name} не існує`);
+    }
+  }
+
+  async findById(id: number) {
+    const station = await this.pool.query(S_Queries.getStationById, [id]);
+    return station.rows[0].name;
+  }
 }
