@@ -89,6 +89,10 @@ export const Trip_Queries = {
   RETURNING *;
   `,
   getTrip: `
-  SELECT * FROM trips WHERE departure_station_id = $1 AND arrival_station_id = $2 
+  SELECT * FROM trips 
+  WHERE departure_station_id = $1 
+  AND arrival_station_id = $2 
+  AND departure_time >= $3 
+  AND departure_time < ($3::date + INTERVAL '1 day');
   `,
 };
