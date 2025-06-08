@@ -5,7 +5,6 @@ import { TrainService } from 'src/train/train.service';
 import { StationService } from 'src/station/station.service';
 import { Trip_Queries } from 'src/database/database.queries';
 import { FindTripDto } from './dto/find-trip.dto';
-import { Trip } from './entities/trip.entity';
 import { FindOneTripDto } from './dto/trip.dto';
 
 @Injectable()
