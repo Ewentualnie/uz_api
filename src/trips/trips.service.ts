@@ -73,8 +73,8 @@ export class TripsService {
 
         return {
           train,
-          fromStation: departureStation,
-          toStation: arrivalStation,
+          departureStation,
+          arrivalStation,
           departureTime: dto.departure_time,
           arrivalTime: dto.arrival_time,
         };
