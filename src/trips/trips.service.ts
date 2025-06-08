@@ -47,14 +47,12 @@ export class TripsService {
   async findAll(dto: FindTripDto) {
     const fromStation = await this.stationService.findByName(dto.departureSt);
     const toStation = await this.stationService.findByName(dto.arrivalSt);
-    if (fromStation.id == toStation.id) {
-      throw new BadRequestException(
-        'Станція відправлення і станція прибуття мають відрізнятись',
-      );
-    }
+    const departureTime = dto.departureTime;
+
     const result = await this.pool.query(Trip_Queries.getTrip, [
       fromStation.id,
       toStation.id,
+      departureTime,
     ]);
 
     return this.findTrip(result.rows);
