@@ -29,6 +29,7 @@ export class StationController {
   }
 
   @Get()
+  @ApiOperation({ summary: 'Повертає всі станції' })
   findAll() {
     return this.stationService.findAll();
   }
