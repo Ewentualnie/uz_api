@@ -1,6 +1,6 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
 import { Pool } from 'pg';
-import { S_Queries } from './database.queries';
+import { C_Queries, S_Queries, T_Queries } from './database.queries';
 
 @Injectable()
 export class DBService implements OnModuleInit {
@@ -12,5 +12,7 @@ export class DBService implements OnModuleInit {
 
   private async createTablesIfNotExist() {
     await this.pool.query(S_Queries.createTable);
+    await this.pool.query(T_Queries.createTable);
+    await this.pool.query(C_Queries.createTable);
   }
 }
