@@ -1,7 +1,9 @@
-import { NestFactory } from '@nestjs/core';
+import { NestFactory, Reflector } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { MyCacheInterceptor } from './interceptors/cache.interceptor';
+import { CACHE_MANAGER, Cache } from '@nestjs/cache-manager';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -21,6 +23,12 @@ async function bootstrap() {
       transform: true,
     }),
   );
+
+  const reflector = app.get(Reflector);
+  const cacheManager = app.get<Cache>(CACHE_MANAGER);
+
+  app.useGlobalInterceptors(new MyCacheInterceptor(cacheManager, reflector));
+
   await app.listen(3000);
 }
 bootstrap();
