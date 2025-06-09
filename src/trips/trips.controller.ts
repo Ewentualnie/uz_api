@@ -1,4 +1,4 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Query } from '@nestjs/common';
 import { TripsService } from './trips.service';
 import { CreateTripDto } from './dto/create-trip.dto';
 import { FindTripDto } from './dto/find-trip.dto';
@@ -14,11 +14,11 @@ export class TripsController {
     return this.tripsService.create(createTripDto);
   }
 
-  @Post('/find')
+  @Get()
   @ApiOperation({
     summary: 'Повертає список поїздок, що задовольняє вхідні параметри',
   })
-  findAll(@Body() findTripDto: FindTripDto) {
+  findAll(@Query() findTripDto: FindTripDto) {
     return this.tripsService.findAll(findTripDto);
   }
 }
